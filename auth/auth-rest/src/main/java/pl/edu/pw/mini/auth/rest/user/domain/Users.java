@@ -1,7 +1,7 @@
 package pl.edu.pw.mini.auth.rest.user.domain;
 
 import lombok.Data;
-import pl.gutowskid.auth.api.UserRole;
+import pl.edu.pw.mini.model.UserRole;
 
 import javax.persistence.*;
 

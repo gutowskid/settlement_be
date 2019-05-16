@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import pl.edu.pw.mini.model.UserRole;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
@@ -29,12 +30,12 @@ public class TokenHandler {
         signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
     }
 
-    public String getTokenWithUser(String userId, String role, String forename, String surname, HttpServletRequest request) {
+    public String getTokenWithUser(String userId, UserRole role, String forename, String surname, HttpServletRequest request) {
         Date expires = new Date(System.currentTimeMillis() + properties.getTokenValidity());
 
         return Jwts.builder()
                 .claim(USER_ID, userId)
-                .claim(ROLE, role)
+                .claim(ROLE, role.name())
                 .claim(IP, request.getRemoteAddr())
                 .claim(FORENAME, forename)
                 .claim(SURNAME, surname)

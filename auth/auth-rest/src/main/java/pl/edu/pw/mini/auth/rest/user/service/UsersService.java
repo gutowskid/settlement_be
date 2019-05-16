@@ -34,7 +34,7 @@ public class UsersService {
         if(!user.getPasswordHash().equals(passwordHash)) {
             throw ErrorCode.AUT_0002;
         }
-        return StringWrapper.fromValue(tokenHandler.getTokenWithUser(user.getId(), user.getRole().name(), user.getForename(), user.getSurname(), request));
+        return StringWrapper.fromValue(tokenHandler.getTokenWithUser(user.getId(), user.getRole(), user.getForename(), user.getSurname(), request));
     }
     private String calculateHash(String password) {
         return DigestUtils.sha256Hex(password);
