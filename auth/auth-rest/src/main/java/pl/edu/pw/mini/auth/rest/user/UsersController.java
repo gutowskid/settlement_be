@@ -31,4 +31,10 @@ public class UsersController {
     public StringWrapper addUser(@RequestBody AddUserDto addUserDto) {
         return usersService.addUser(addUserDto);
     }
+
+    @AllowAll
+    @RequestMapping(value = "/auth/disableuser", method = RequestMethod.PUT, produces = "application/json")
+    public void disableUser(String userId) {
+        usersService.disableUser(userId);
+    }
 }

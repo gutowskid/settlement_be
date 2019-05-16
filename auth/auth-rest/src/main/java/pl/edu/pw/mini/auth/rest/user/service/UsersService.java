@@ -48,4 +48,10 @@ public class UsersService {
         userRepository.save(users);
         return StringWrapper.fromValue(password);
     }
+
+    public void disableUser(String userId) {
+        Users user = userRepository.findById(userId).orElseThrow(() -> ErrorCode.AUT_0003);
+        user.setIsActive(false);
+        userRepository.save(user);
+    }
 }
