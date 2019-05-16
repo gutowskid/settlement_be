@@ -11,7 +11,7 @@ public class AddUserAssembler {
         entity.setId(dto.getUserId());
         entity.setRole(dto.getRole());
         entity.setForename(dto.getForename());
-        entity.setSurname(dto.getForename());
+        entity.setSurname(dto.getSurname());
         return entity;
     }
 }
