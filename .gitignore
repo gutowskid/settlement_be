@@ -2,6 +2,8 @@
 /auth/auth-api/target/
 /CORE/api-core/target/
 /CORE/core/target/
+/employee/employee-rest/target/
+/employee/employee-api/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
