@@ -23,7 +23,7 @@ public class ObjectMapperConfiguration {
         ObjectMapper objectMapper = new ObjectMapper();
         JavaTimeModule javaTimeModule = new JavaTimeModule();
         javaTimeModule.addSerializer(LocalDate.class, new LocalDateSerializer(timeZone));
-        //javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeserializer());
+        javaTimeModule.addDeserializer(LocalDate.class, new LocalDateDeSerializer(timeZone));
         objectMapper.getSerializationConfig().getDateFormat().setTimeZone(TimeZone.getTimeZone("GTM"));
         objectMapper.getDeserializationConfig().getDateFormat().setTimeZone(TimeZone.getTimeZone("GTM"));
         objectMapper.registerModule(javaTimeModule);
