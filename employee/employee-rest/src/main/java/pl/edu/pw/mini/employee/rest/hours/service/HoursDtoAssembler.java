@@ -3,7 +3,7 @@ package pl.edu.pw.mini.employee.rest.hours.service;
 import org.springframework.stereotype.Component;
 import pl.edu.pw.mini.core.tools.DtoAssembler;
 import pl.edu.pw.mini.employee.rest.hours.domain.Hours;
-import pl.gutowskid.employee.api.dayhour.HoursDto;
+import pl.gutowskid.employee.api.hours.HoursDto;
 
 @Component
 public class HoursDtoAssembler extends DtoAssembler<Hours,HoursDto> {

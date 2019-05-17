@@ -1,4 +1,4 @@
-package pl.gutowskid.employee.api.dayhour;
+package pl.gutowskid.employee.api.hours;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

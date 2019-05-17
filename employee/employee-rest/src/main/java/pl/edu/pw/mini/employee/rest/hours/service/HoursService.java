@@ -6,7 +6,7 @@ import pl.edu.pw.mini.employee.rest.hours.domain.Hours;
 import pl.edu.pw.mini.employee.rest.hours.domain.HoursPK;
 import pl.edu.pw.mini.employee.rest.hours.domain.HoursRepository;
 import pl.edu.pw.mini.model.Period;
-import pl.gutowskid.employee.api.dayhour.HoursDto;
+import pl.gutowskid.employee.api.hours.HoursDto;
 
 import java.util.List;
 
