@@ -4,7 +4,6 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pw.mini.auth.rest.common.ErrorCode;
 import pl.edu.pw.mini.auth.rest.user.domain.Users;
 import pl.edu.pw.mini.auth.rest.user.domain.UsersRepository;
 import pl.edu.pw.mini.core.security.authentication.TokenHandler;
@@ -13,6 +12,8 @@ import pl.gutowskid.auth.api.AddUserDto;
 import pl.gutowskid.auth.api.LoginDto;
 
 import javax.servlet.http.HttpServletRequest;
+
+import static pl.edu.pw.mini.auth.rest.common.ErrorCode.*;
 
 
 @Service
@@ -28,11 +29,14 @@ public class UsersService {
     private AddUserAssembler addUserAssembler;
 
     public StringWrapper login(LoginDto loginDto, HttpServletRequest request) {
-        Users user = userRepository.findById(loginDto.getLogin()).orElseThrow(() -> ErrorCode.AUT_0001);
+        Users user = userRepository.findById(loginDto.getLogin()).orElseThrow(() -> AUT_0001);
         String passwordHash = calculateHash(loginDto.getPassword());
 
         if(!user.getPasswordHash().equals(passwordHash)) {
-            throw ErrorCode.AUT_0002;
+            throw AUT_0002;
+        }
+        if(!user.getIsActive()) {
+            throw AUT_0004;
         }
         return StringWrapper.fromValue(tokenHandler.getTokenWithUser(user.getId(), user.getRole(), user.getForename(), user.getSurname(), request));
     }
@@ -50,7 +54,7 @@ public class UsersService {
     }
 
     public void disableUser(String userId) {
-        Users user = userRepository.findById(userId).orElseThrow(() -> ErrorCode.AUT_0003);
+        Users user = userRepository.findById(userId).orElseThrow(() -> AUT_0003);
         user.setIsActive(false);
         userRepository.save(user);
     }
