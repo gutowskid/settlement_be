@@ -1,4 +1,4 @@
-package pl.gutowskid.employee.api.bill;
+package pl.edu.pw.mini.employee.api.hours;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +9,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateBillDto {
-    private String settlementNumber;
-    private LocalDate from;
-    private LocalDate to;
+public class HoursDto {
+    private LocalDate day;
+    private String task;
+    private Long count;
 }

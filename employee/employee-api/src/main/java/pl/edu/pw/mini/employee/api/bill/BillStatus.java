@@ -1,4 +1,4 @@
-package pl.gutowskid.employee.api.bill;
+package pl.edu.pw.mini.employee.api.bill;
 
 public enum BillStatus {
     SAVED,

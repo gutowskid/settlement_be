@@ -3,7 +3,7 @@ package pl.edu.pw.mini.employee.rest.bill.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pl.gutowskid.employee.api.bill.BillStatus;
+import pl.edu.pw.mini.employee.api.bill.BillStatus;
 
 import javax.persistence.*;
 import java.time.LocalDate;

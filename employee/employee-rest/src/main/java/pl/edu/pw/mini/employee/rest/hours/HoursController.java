@@ -9,7 +9,7 @@ import pl.edu.pw.mini.core.security.authorization.AllowAll;
 import pl.edu.pw.mini.core.tools.ContextService;
 import pl.edu.pw.mini.employee.rest.hours.service.HoursService;
 import pl.edu.pw.mini.model.Period;
-import pl.gutowskid.employee.api.hours.HoursDto;
+import pl.edu.pw.mini.employee.api.hours.HoursDto;
 
 import java.util.List;
 

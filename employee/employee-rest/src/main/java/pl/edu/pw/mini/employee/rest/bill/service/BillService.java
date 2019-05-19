@@ -9,10 +9,10 @@ import pl.edu.pw.mini.employee.rest.bill.domain.BillRepository;
 import pl.edu.pw.mini.employee.rest.hours.service.HoursService;
 import pl.edu.pw.mini.employee.rest.salary.service.EmployeeSalaryService;
 import pl.edu.pw.mini.model.Period;
-import pl.gutowskid.employee.api.bill.BillDto;
-import pl.gutowskid.employee.api.bill.BillStatus;
-import pl.gutowskid.employee.api.bill.CreateBillDto;
-import pl.gutowskid.employee.api.hours.HoursDto;
+import pl.edu.pw.mini.employee.api.bill.BillDto;
+import pl.edu.pw.mini.employee.api.bill.BillStatus;
+import pl.edu.pw.mini.employee.api.bill.CreateBillDto;
+import pl.edu.pw.mini.employee.api.hours.HoursDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -3,7 +3,7 @@ package pl.edu.pw.mini.employee.rest.bill.service;
 import org.springframework.stereotype.Component;
 import pl.edu.pw.mini.core.tools.DtoAssembler;
 import pl.edu.pw.mini.employee.rest.bill.domain.Bill;
-import pl.gutowskid.employee.api.bill.BillDto;
+import pl.edu.pw.mini.employee.api.bill.BillDto;
 
 @Component
 public class BillDtoAssembler extends DtoAssembler<Bill, BillDto> {

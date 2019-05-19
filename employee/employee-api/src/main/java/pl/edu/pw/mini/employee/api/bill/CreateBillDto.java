@@ -1,4 +1,4 @@
-package pl.gutowskid.employee.api.bill;
+package pl.edu.pw.mini.employee.api.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,14 +9,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BillDto {
-    private Long id;
-    private Long brutto;
-    private Double netto;
-    private Double incomeCosts;
-    private Double tax;
-    private Long hours;
-    private Long salary;
+public class CreateBillDto {
     private String settlementNumber;
     private LocalDate from;
     private LocalDate to;
