@@ -2,20 +2,20 @@ package pl.edu.pw.mini.employee.rest.bill.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pw.mini.employee.rest.accountnumber.service.AccountNumberService;
-import pl.edu.pw.mini.employee.rest.bill.domain.Bill;
-import pl.edu.pw.mini.employee.rest.bill.domain.BillRepository;
-
-import pl.edu.pw.mini.employee.rest.hours.service.HoursService;
-import pl.edu.pw.mini.employee.rest.salary.service.EmployeeSalaryService;
-import pl.edu.pw.mini.model.Period;
 import pl.edu.pw.mini.employee.api.bill.BillDto;
 import pl.edu.pw.mini.employee.api.bill.BillStatus;
 import pl.edu.pw.mini.employee.api.bill.CreateBillDto;
 import pl.edu.pw.mini.employee.api.hours.HoursDto;
+import pl.edu.pw.mini.employee.rest.accountnumber.service.AccountNumberService;
+import pl.edu.pw.mini.employee.rest.bill.domain.Bill;
+import pl.edu.pw.mini.employee.rest.bill.domain.BillRepository;
+import pl.edu.pw.mini.employee.rest.hours.service.HoursService;
+import pl.edu.pw.mini.employee.rest.salary.service.EmployeeSalaryService;
+import pl.edu.pw.mini.model.Period;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static pl.edu.pw.mini.employee.rest.common.ErrorCode.*;
 
@@ -87,6 +87,11 @@ public class BillService {
 
     public BillDto updateBill(String employeeId, Long id, CreateBillDto createBillDto) {
         Bill bill = findBillById(employeeId, id);
+
+        if (Stream.of(BillStatus.SENT, BillStatus.PROCESSED).anyMatch(s -> s == bill.getStatus())) {
+            throw EMP_0006;
+        }
+        
         generateBill(employeeId, createBillDto, bill);
         repository.save(bill);
         return billDtoAssembler.toDto(bill);
