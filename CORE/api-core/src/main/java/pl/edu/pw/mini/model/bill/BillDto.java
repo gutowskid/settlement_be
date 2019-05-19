@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.employee.api.bill;
+package pl.edu.pw.mini.model.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class BillDto {
     private Long id;
+    private String employeeId;
     private Long brutto;
     private Double netto;
     private Double incomeCosts;

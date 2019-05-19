@@ -4,6 +4,8 @@
 /CORE/core/target/
 /employee/employee-rest/target/
 /employee/employee-api/target/
+/manager/manager-rest/target/
+/manager/manager-api/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###

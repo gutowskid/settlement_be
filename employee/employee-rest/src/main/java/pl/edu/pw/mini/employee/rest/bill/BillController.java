@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.mini.core.security.authorization.AllowAll;
 import pl.edu.pw.mini.core.tools.ContextService;
 import pl.edu.pw.mini.employee.rest.bill.service.BillService;
-import pl.edu.pw.mini.employee.api.bill.BillDto;
+import pl.edu.pw.mini.model.bill.BillDto;
 import pl.edu.pw.mini.employee.api.bill.CreateBillDto;
 
 import java.util.List;

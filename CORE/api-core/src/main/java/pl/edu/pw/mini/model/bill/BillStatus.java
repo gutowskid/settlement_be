@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.employee.api.bill;
+package pl.edu.pw.mini.model.bill;
 
 public enum BillStatus {
     SAVED,
