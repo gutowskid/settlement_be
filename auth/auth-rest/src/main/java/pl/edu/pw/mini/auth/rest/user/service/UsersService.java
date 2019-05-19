@@ -8,8 +8,8 @@ import pl.edu.pw.mini.auth.rest.user.domain.Users;
 import pl.edu.pw.mini.auth.rest.user.domain.UsersRepository;
 import pl.edu.pw.mini.core.security.authentication.TokenHandler;
 import pl.edu.pw.mini.core.tools.StringWrapper;
-import pl.gutowskid.auth.api.AddUserDto;
-import pl.gutowskid.auth.api.LoginDto;
+import pl.edu.pw.mini.auth.api.AddUserDto;
+import pl.edu.pw.mini.auth.api.LoginDto;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pw.mini.auth.rest.user.service.UsersService;
 import pl.edu.pw.mini.core.security.authorization.AllowAll;
 import pl.edu.pw.mini.core.tools.StringWrapper;
-import pl.gutowskid.auth.api.AddUserDto;
-import pl.gutowskid.auth.api.LoginDto;
+import pl.edu.pw.mini.auth.api.AddUserDto;
+import pl.edu.pw.mini.auth.api.LoginDto;
 
 import javax.servlet.http.HttpServletRequest;
 

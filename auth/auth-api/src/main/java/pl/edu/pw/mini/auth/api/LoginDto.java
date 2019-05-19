@@ -1,4 +1,4 @@
-package pl.gutowskid.auth.api;
+package pl.edu.pw.mini.auth.api;
 
 import lombok.Data;
 
