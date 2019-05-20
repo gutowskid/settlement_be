@@ -1,6 +1,7 @@
 package pl.edu.pw.mini.payroll.rest.salary;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ public class PayrollSalaryController {
 
 
     @RequestMapping(value = "/salary/list", method = RequestMethod.POST, produces = "application/json")
-    public JsonListChunk<SalaryDto> getEmployeesSalary(JsonListRequest<Void> request) {
+    public JsonListChunk<SalaryDto> getEmployeesSalary(@RequestBody JsonListRequest request) {
         return service.getEmployeeSalary(request);
     }
 

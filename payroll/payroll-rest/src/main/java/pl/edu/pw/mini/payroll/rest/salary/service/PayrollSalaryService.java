@@ -19,13 +19,13 @@ public class PayrollSalaryService {
     @Autowired
     private SalaryDtoAssembler assembler;
 
-    public JsonListChunk<SalaryDto> getEmployeeSalary(JsonListRequest<Void> request) {
+    public JsonListChunk<SalaryDto> getEmployeeSalary(JsonListRequest request) {
         Page<Salary> page = repository.findAll(PageRequest.of(request.getPageNumber(), request.getPageSize()));
 
         return new JsonListChunk<> (
                 assembler.toDtoList(page.get()),
                 page.getTotalElements(),
-                page.getTotalPages() > request.getPageSize()
+                page.getTotalPages() > request.getPageNumber() + 1
         );
     }
 
