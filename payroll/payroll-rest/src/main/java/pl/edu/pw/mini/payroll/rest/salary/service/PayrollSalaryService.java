@@ -1,12 +1,14 @@
 package pl.edu.pw.mini.payroll.rest.salary.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import pl.edu.pw.mini.model.JsonListChunk;
+import pl.edu.pw.mini.model.JsonListRequest;
 import pl.edu.pw.mini.model.salary.SalaryDto;
 import pl.edu.pw.mini.payroll.rest.salary.domain.Salary;
 import pl.edu.pw.mini.payroll.rest.salary.domain.SalaryRepository;
-
-import java.util.List;
 
 @Service
 public class PayrollSalaryService {
@@ -17,9 +19,14 @@ public class PayrollSalaryService {
     @Autowired
     private SalaryDtoAssembler assembler;
 
-    public List<SalaryDto> getEmployeesSalary() { //TODO paging
-        List<Salary> list = repository.findAll();
-        return assembler.toDtoList(list);
+    public JsonListChunk<SalaryDto> getEmployeeSalary(JsonListRequest<Void> request) {
+        Page<Salary> page = repository.findAll(PageRequest.of(request.getPageNumber(), request.getPageSize()));
+
+        return new JsonListChunk<> (
+                assembler.toDtoList(page.get()),
+                page.getTotalElements(),
+                page.getTotalPages() > request.getPageSize()
+        );
     }
 
     public void defineEmployeeSalary(SalaryDto dto) {

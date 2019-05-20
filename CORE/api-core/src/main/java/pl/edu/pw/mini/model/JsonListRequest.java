@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class JsonListRequest<T> {
-    private Long pageNumber;
-    private Long pageSize;
+    private int pageNumber = 0;
+    private int pageSize = 10;
     private T searchCriteria;
 }

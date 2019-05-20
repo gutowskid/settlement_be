@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SalaryDto {
     private String employeeId;
-    private Long salary
+    private Long salary;
 }
