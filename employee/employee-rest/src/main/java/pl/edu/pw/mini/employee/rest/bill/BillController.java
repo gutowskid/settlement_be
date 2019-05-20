@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.mini.core.security.authorization.AllowAll;
 import pl.edu.pw.mini.core.tools.ContextService;
-import pl.edu.pw.mini.employee.rest.bill.service.BillService;
-import pl.edu.pw.mini.model.bill.BillDto;
 import pl.edu.pw.mini.employee.api.bill.CreateBillDto;
-
-import java.util.List;
+import pl.edu.pw.mini.employee.rest.bill.service.BillService;
+import pl.edu.pw.mini.model.JsonListChunk;
+import pl.edu.pw.mini.model.JsonListRequest;
+import pl.edu.pw.mini.model.bill.BillDto;
 
 @RestController
 public class BillController {
@@ -21,10 +21,17 @@ public class BillController {
     public BillDto generateBill(@RequestBody CreateBillDto createBillDto) {
         return service.generateBill(ContextService.getContext().getUserId(), createBillDto);
     }
+
     @AllowAll
-    @RequestMapping(value = "/bill/list", method = RequestMethod.GET, produces = "application/json")
-    public List<BillDto> getMyBills(Boolean processed) {
-        return service.getMyBills(ContextService.getContext().getUserId(), processed);
+    @RequestMapping(value = "/bill/actual", method = RequestMethod.POST, produces = "application/json")
+    public JsonListChunk<BillDto> getActualBills(@RequestBody JsonListRequest request) {
+        return service.getActualBills(ContextService.getContext().getUserId(), request);
+    }
+
+    @AllowAll
+    @RequestMapping(value = "/bill/archived", method = RequestMethod.POST, produces = "application/json")
+    public JsonListChunk<BillDto> getArchivedBills(@RequestBody JsonListRequest request) {
+        return service.getArchivedBills(ContextService.getContext().getUserId(), request);
     }
 
     @AllowAll

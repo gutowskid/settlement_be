@@ -1,6 +1,8 @@
 package pl.edu.pw.mini.employee.rest.bill.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.mini.employee.api.bill.CreateBillDto;
 import pl.edu.pw.mini.employee.api.hours.HoursDto;
@@ -9,6 +11,8 @@ import pl.edu.pw.mini.employee.rest.bill.domain.Bill;
 import pl.edu.pw.mini.employee.rest.bill.domain.BillRepository;
 import pl.edu.pw.mini.employee.rest.hours.service.HoursService;
 import pl.edu.pw.mini.employee.rest.salary.service.EmployeeSalaryService;
+import pl.edu.pw.mini.model.JsonListChunk;
+import pl.edu.pw.mini.model.JsonListRequest;
 import pl.edu.pw.mini.model.Period;
 import pl.edu.pw.mini.model.bill.BillDto;
 import pl.edu.pw.mini.model.bill.BillStatus;
@@ -63,8 +67,23 @@ public class BillService {
         return bill;
     }
 
-    public List<BillDto> getMyBills(String employeeId, Boolean processed) {
-        return billDtoAssembler.toDtoList(repository.findByEmployeeIdAndProcessed(employeeId, processed));
+    public JsonListChunk<BillDto> getActualBills(String employeeId, JsonListRequest request) {
+        Page<Bill> page = repository.findByEmployeeIdAndProcessed(employeeId, false, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+        return new JsonListChunk<>(
+                billDtoAssembler.toDtoList(page.get()),
+                page.getTotalElements(),
+                page.getTotalPages() > request.getPageNumber() + 1
+        );
+
+    }
+
+    public JsonListChunk<BillDto> getArchivedBills(String employeeId, JsonListRequest request) {
+        Page<Bill> page = repository.findByEmployeeIdAndProcessed(employeeId, true, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+        return new JsonListChunk<>(
+                billDtoAssembler.toDtoList(page.get()),
+                page.getTotalElements(),
+                page.getTotalPages() > request.getPageNumber() + 1
+        );
     }
 
     public BillDto getBillById(String employeeId, Long id) {
