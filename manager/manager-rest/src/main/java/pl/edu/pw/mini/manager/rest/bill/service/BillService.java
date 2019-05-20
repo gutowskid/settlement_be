@@ -1,14 +1,16 @@
 package pl.edu.pw.mini.manager.rest.bill.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.mini.manager.rest.bill.domain.BillManager;
 import pl.edu.pw.mini.manager.rest.bill.domain.BillManagerRepository;
 import pl.edu.pw.mini.manager.rest.bill.domain.EmployeeManager;
+import pl.edu.pw.mini.model.JsonListChunk;
+import pl.edu.pw.mini.model.JsonListRequest;
 import pl.edu.pw.mini.model.bill.BillDto;
 import pl.edu.pw.mini.model.bill.BillStatus;
-
-import java.util.List;
 
 import static pl.edu.pw.mini.manager.rest.common.ErrorCode.*;
 
@@ -21,9 +23,22 @@ public class BillService {
     @Autowired
     private BillDtoAssembler dtoAssembler;
 
-    public List<BillDto> findActualBills(String managerId) {
-        List<BillManager> bills = repository.findByManagers_managerIdContainsAndStatus(managerId, BillStatus.SENT);
-        return dtoAssembler.toDtoList(bills);
+    public JsonListChunk<BillDto> findActualBills(String managerId, JsonListRequest request) {
+        Page<BillManager> page = repository.findByManagers_managerIdContainsAndStatus(managerId, BillStatus.SENT, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+        return new JsonListChunk<>(
+                dtoAssembler.toDtoList(page.get()),
+                page.getTotalElements(),
+                page.getTotalPages() > request.getPageNumber() + 1
+        );
+    }
+
+    public JsonListChunk<BillDto> findArchivedBills(String managerId, JsonListRequest request) {
+        Page<BillManager> page = repository.findByManagers_managerIdContainsAndStatus(managerId, BillStatus.SENT, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+        return new JsonListChunk<>(
+                dtoAssembler.toDtoList(page.get()),
+                page.getTotalElements(),
+                page.getTotalPages() > request.getPageNumber() + 1
+        );
     }
 
     public void acceptBill(String managerId, Long billId) {
