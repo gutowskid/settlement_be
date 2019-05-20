@@ -6,6 +6,8 @@
 /employee/employee-api/target/
 /manager/manager-rest/target/
 /manager/manager-api/target/
+/payroll/payroll-rest/target/
+/payroll/payroll-api/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
