@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.employee.rest.salary.domain;
+package pl.edu.pw.mini.payroll.rest.salary.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
