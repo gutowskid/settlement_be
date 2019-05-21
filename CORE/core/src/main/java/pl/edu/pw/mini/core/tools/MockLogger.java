@@ -13,4 +13,12 @@ public class MockLogger {
         log.warn("MOCKLOGGER");
         return s;
     }
+
+    public static Long getLong(Long l) {
+        if(THROW_EXCEPTION) {
+            throw new RuntimeException("MOCKLOGGER!");
+        }
+        log.warn("MOCKLOGGER");
+        return l;
+    }
 }

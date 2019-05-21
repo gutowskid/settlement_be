@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.auth.rest.user.domain;
+package pl.edu.pw.mini.core.model.user;
 
 import lombok.Data;
 import pl.edu.pw.mini.model.UserRole;

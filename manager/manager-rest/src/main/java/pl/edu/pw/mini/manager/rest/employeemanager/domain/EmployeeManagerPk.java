@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.manager.rest.bill.domain;
+package pl.edu.pw.mini.manager.rest.employeemanager.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

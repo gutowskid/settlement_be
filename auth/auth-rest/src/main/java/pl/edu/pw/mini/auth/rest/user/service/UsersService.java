@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.edu.pw.mini.auth.rest.user.domain.Users;
+import pl.edu.pw.mini.core.model.user.Users;
 import pl.edu.pw.mini.auth.rest.user.domain.UsersRepository;
 import pl.edu.pw.mini.core.security.authentication.TokenHandler;
 import pl.edu.pw.mini.core.tools.StringWrapper;

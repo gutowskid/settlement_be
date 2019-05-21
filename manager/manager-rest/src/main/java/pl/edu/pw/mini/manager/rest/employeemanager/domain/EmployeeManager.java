@@ -1,8 +1,9 @@
-package pl.edu.pw.mini.manager.rest.bill.domain;
+package pl.edu.pw.mini.manager.rest.employeemanager.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.edu.pw.mini.core.model.user.Users;
 
 import javax.persistence.*;
 
@@ -21,4 +22,8 @@ public class EmployeeManager {
     @Id
     @Column(name = "MANAGER_ID")
     private String managerId;
+
+    @ManyToOne
+    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+    private Users user;
 }

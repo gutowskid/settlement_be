@@ -7,4 +7,5 @@ import pl.edu.pw.mini.model.bill.BillStatus;
 
 public interface BillManagerRepository extends JpaRepository<BillManager, Long> {
     Page<BillManager> findByManagers_managerIdContainsAndStatus(String managerId, BillStatus status, Pageable pageable);
+    Long countByManagers_managerIdContainsAndStatus(String managerId, BillStatus status);
 }

@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import pl.edu.pw.mini.manager.rest.bill.domain.BillManager;
 import pl.edu.pw.mini.manager.rest.bill.domain.BillManagerRepository;
-import pl.edu.pw.mini.manager.rest.bill.domain.EmployeeManager;
+import pl.edu.pw.mini.manager.rest.employeemanager.domain.EmployeeManager;
 import pl.edu.pw.mini.model.JsonListChunk;
 import pl.edu.pw.mini.model.JsonListRequest;
 import pl.edu.pw.mini.model.bill.BillDto;

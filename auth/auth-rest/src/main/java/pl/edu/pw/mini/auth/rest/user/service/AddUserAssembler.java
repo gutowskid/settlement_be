@@ -1,7 +1,7 @@
 package pl.edu.pw.mini.auth.rest.user.service;
 
 import org.springframework.stereotype.Component;
-import pl.edu.pw.mini.auth.rest.user.domain.Users;
+import pl.edu.pw.mini.core.model.user.Users;
 import pl.edu.pw.mini.auth.api.AddUserDto;
 
 @Component
