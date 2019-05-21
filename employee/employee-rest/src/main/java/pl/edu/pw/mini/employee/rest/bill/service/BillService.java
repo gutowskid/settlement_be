@@ -19,6 +19,7 @@ import pl.edu.pw.mini.model.bill.BillStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static pl.edu.pw.mini.employee.rest.common.ErrorCode.*;
@@ -60,7 +61,9 @@ public class BillService {
         bill.setIncomeCosts(bill.getBrutto() * 0.2);
         bill.setTax((bill.getBrutto() - bill.getIncomeCosts()) * 0.18);
         bill.setNetto(bill.getBrutto() - bill.getTax());
-        bill.setCreationDate(LocalDateTime.now());
+        if(Objects.isNull(bill.getId())) {
+            bill.setCreationDate(LocalDateTime.now());
+        }
         bill.setUpdateDate(LocalDateTime.now());
         bill.setStatus(BillStatus.SAVED);
         bill.setSettlementNumber(createBillDto.getSettlementNumber());
