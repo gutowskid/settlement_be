@@ -42,6 +42,10 @@ public class BillService {
     private BillRepository repository;
 
     public BillDto generateBill(String employeeId, CreateBillDto createBillDto) {
+        Long count = repository.countByEmployeeIdAndProcessed(employeeId, false);
+        if(count > 0) {
+            throw EMP_0007;
+        }
         Bill bill = generateBill(employeeId, createBillDto, new Bill());
         repository.save(bill);
         return billDtoAssembler.toDto(bill);
@@ -67,14 +71,9 @@ public class BillService {
         return bill;
     }
 
-    public JsonListChunk<BillDto> getActualBills(String employeeId, JsonListRequest request) {
-        Page<Bill> page = repository.findByEmployeeIdAndProcessed(employeeId, false, PageRequest.of(request.getPageNumber(), request.getPageSize()));
-        return new JsonListChunk<>(
-                billDtoAssembler.toDtoList(page.get()),
-                page.getTotalElements(),
-                page.getTotalPages() > request.getPageNumber() + 1
-        );
-
+    public BillDto getActualBill(String employeeId) {
+        Bill bill = repository.findFirstByEmployeeIdAndProcessed(employeeId, false).orElseThrow(() -> EMP_0008);
+        return billDtoAssembler.toDto(bill);
     }
 
     public JsonListChunk<BillDto> getArchivedBills(String employeeId, JsonListRequest request) {

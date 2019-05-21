@@ -23,9 +23,9 @@ public class BillController {
     }
 
     @AllowAll
-    @RequestMapping(value = "/bill/actual", method = RequestMethod.POST, produces = "application/json")
-    public JsonListChunk<BillDto> getActualBills(@RequestBody JsonListRequest request) {
-        return service.getActualBills(ContextService.getContext().getUserId(), request);
+    @RequestMapping(value = "/bill/actual", method = RequestMethod.GET, produces = "application/json")
+    public BillDto getActualBill() {
+        return service.getActualBill(ContextService.getContext().getUserId());
     }
 
     @AllowAll

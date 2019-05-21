@@ -4,6 +4,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface BillRepository extends JpaRepository<Bill, Long> {
     Page<Bill> findByEmployeeIdAndProcessed(String employeeId, Boolean processed, Pageable pageable);
+    Optional<Bill> findFirstByEmployeeIdAndProcessed(String employeeId, Boolean processed);
+    Long countByEmployeeIdAndProcessed(String employeeId, Boolean processed);
 }
