@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pw.mini.core.tools.ContextService;
 import pl.edu.pw.mini.manager.rest.info.service.InfoService;
-import pl.gutowskid.manager.api.info.StatisticDto;
+import pl.gutowskid.manager.api.info.EmployeeInfoDto;
+import pl.gutowskid.manager.api.info.SummaryDto;
+
+import java.util.List;
 
 @RestController
 public class InfoController {
@@ -14,8 +17,13 @@ public class InfoController {
     @Autowired
     private InfoService service;
 
-    @RequestMapping(path = "/info/statistic", method = RequestMethod.GET, produces = "application/json")
-    public StatisticDto getStatistic() {
-        return service.getStatistic(ContextService.getContext().getUserId());
+    @RequestMapping(path = "/info/summary", method = RequestMethod.GET, produces = "application/json")
+    public SummaryDto getSummary() {
+        return service.getSummary(ContextService.getContext().getUserId());
+    }
+
+    @RequestMapping(path = "/info/employees", method = RequestMethod.GET, produces = "application/json")
+    public List<EmployeeInfoDto> getEmployeesInfo() {
+        return service.getEmployeesInfo(ContextService.getContext().getUserId());
     }
 }
