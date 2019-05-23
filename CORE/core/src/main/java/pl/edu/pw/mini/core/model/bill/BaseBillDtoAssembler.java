@@ -5,7 +5,7 @@ import pl.edu.pw.mini.model.bill.BillDto;
 
 public abstract class BaseBillDtoAssembler<X extends BaseBill, Z extends BillDto> extends DtoAssembler<X, Z> {
 
-    public BillDto fill(X input, Z dto) {
+    public void fill(X input, Z dto) {
         dto.setEmployeeId(input.getEmployeeId());
         dto.setId(input.getId());
         dto.setSalary(input.getSalary());
@@ -17,6 +17,5 @@ public abstract class BaseBillDtoAssembler<X extends BaseBill, Z extends BillDto
         dto.setIncomeCosts(dto.getBrutto() * 0.2);
         dto.setTax((dto.getBrutto() - dto.getIncomeCosts()) * 0.18);
         dto.setNetto(dto.getBrutto() - dto.getTax());
-        return dto;
     }
 }
