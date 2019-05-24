@@ -32,7 +32,7 @@ public class BillService {
         );
     }
 
-    public JsonListChunk<BillDto> findArchivedBills(String managerId, JsonListRequest request) {
+    public JsonListChunk<BillDto> findArchivedBills(String managerId, JsonListRequest request) { //TODO BillStatus
         Page<BillManager> page = repository.findByManagers_managerIdContainsAndStatus(managerId, BillStatus.SENT, PageRequest.of(request.getPageNumber(), request.getPageSize()));
         return new JsonListChunk<>(
                 dtoAssembler.toDtoList(page.get()),
