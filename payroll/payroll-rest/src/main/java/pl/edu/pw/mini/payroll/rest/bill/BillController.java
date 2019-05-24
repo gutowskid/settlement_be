@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.edu.pw.mini.model.JsonListChunk;
 import pl.edu.pw.mini.model.JsonListRequest;
-import pl.edu.pw.mini.payroll.api.BillAccountNumberDto;
+import pl.edu.pw.mini.payroll.api.bill.BillAccountNumberDto;
 import pl.edu.pw.mini.payroll.rest.bill.service.BillService;
 
 @RestController

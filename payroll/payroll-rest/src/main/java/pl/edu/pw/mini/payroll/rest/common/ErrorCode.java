@@ -5,4 +5,6 @@ import pl.edu.pw.mini.core.exceptions.BusinessException;
 public class ErrorCode {
     public static BusinessException PAY_0001 = new BusinessException("PAY_0001", "Bill not exists");
     public static BusinessException PAY_0002 = new BusinessException("PAY_0002", "Bill not exists");
+    public static BusinessException PAY_0003 = new BusinessException("PAY_0003", "Invoice not exists");
+    public static BusinessException PAY_0004 = new BusinessException("PAY_0004", "Invoice not exists");
 }

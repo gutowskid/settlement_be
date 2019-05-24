@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.edu.pw.mini.model.JsonListChunk;
 import pl.edu.pw.mini.model.JsonListRequest;
 import pl.edu.pw.mini.model.bill.BillStatus;
-import pl.edu.pw.mini.payroll.api.BillAccountNumberDto;
+import pl.edu.pw.mini.payroll.api.bill.BillAccountNumberDto;
 import pl.edu.pw.mini.payroll.rest.bill.domain.Bill;
 import pl.edu.pw.mini.payroll.rest.bill.domain.BillRepository;
 

@@ -1,4 +1,4 @@
-package pl.edu.pw.mini.payroll.api;
+package pl.edu.pw.mini.payroll.api.bill;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
