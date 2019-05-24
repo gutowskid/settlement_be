@@ -13,13 +13,13 @@ public class ErrorHandler {
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<Object> handleBusinessException(BusinessException exception, HttpServletRequest request) {
-        return new ResponseEntity<>(constructApiError(exception, request), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(constructApiError(exception, request), HttpStatus.BAD_REQUEST);
     }
 
     private ApiError constructApiError(BusinessException exception, HttpServletRequest request) {
         return ApiError.builder()
                 .timestamp(new Date())
-                .status(HttpStatus.ACCEPTED.value())
+                .status(HttpStatus.BAD_REQUEST.value())
                 .errorCode(exception.getCode())
                 .message(exception.getMessage())
                 .path(request.getRequestURI())
