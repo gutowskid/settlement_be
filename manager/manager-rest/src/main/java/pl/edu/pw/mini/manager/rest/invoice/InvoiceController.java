@@ -23,7 +23,7 @@ public class InvoiceController {
     }
 
     @RequestMapping(path = "/invoice/archived", method = RequestMethod.POST, produces = "application/json")
-    public JsonListChunk<InvoiceDto> archivedInvoices(JsonListRequest request) {
+    public JsonListChunk<InvoiceDto> archivedInvoices(@RequestBody JsonListRequest request) {
         return service.archivedInvoices(ContextService.getContext().getUserId(), request);
     }
 
