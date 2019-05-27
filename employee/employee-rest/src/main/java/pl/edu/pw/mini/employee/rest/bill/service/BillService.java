@@ -109,7 +109,7 @@ public class BillService {
     public BillDto updateBill(String employeeId, Long id, CreateBillDto createBillDto) {
         Bill bill = findBillById(employeeId, id);
 
-        if (Stream.of(BillStatus.SENT, BillStatus.PROCESSED).anyMatch(s -> s == bill.getStatus())) {
+        if (Stream.of(BillStatus.SENT, BillStatus.PROCESSED, BillStatus.ACCEPTED).anyMatch(s -> s == bill.getStatus())) {
             throw EMP_0006;
         }
         

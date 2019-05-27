@@ -12,6 +12,9 @@ import pl.edu.pw.mini.model.JsonListRequest;
 import pl.edu.pw.mini.model.bill.BillDto;
 import pl.edu.pw.mini.model.bill.BillStatus;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static pl.edu.pw.mini.manager.rest.common.ErrorCode.*;
 
 @Service
@@ -32,8 +35,11 @@ public class BillService {
         );
     }
 
-    public JsonListChunk<BillDto> findArchivedBills(String managerId, JsonListRequest request) { //TODO BillStatus
-        Page<BillManager> page = repository.findByManagers_managerIdContainsAndStatus(managerId, BillStatus.SENT, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+    public JsonListChunk<BillDto> findArchivedBills(String managerId, JsonListRequest request) {
+        Page<BillManager> page = repository.findByManagers_managerIdContainsAndStatusIn(
+                managerId,
+                Stream.of(BillStatus.REJECTED, BillStatus.ACCEPTED, BillStatus.PROCESSED).collect(Collectors.toList()),
+                PageRequest.of(request.getPageNumber(), request.getPageSize()));
         return new JsonListChunk<>(
                 dtoAssembler.toDtoList(page.get()),
                 page.getTotalElements(),
