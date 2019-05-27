@@ -20,6 +20,7 @@ import pl.edu.pw.mini.model.invoice.InvoiceStatus;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import static pl.edu.pw.mini.employee.rest.common.ErrorCode.*;
 
@@ -95,7 +96,7 @@ public class InvoiceService {
         if(!invoice.getEmployeeId().equals(employeeId)) {
             throw EMP_0012;
         }
-        if(invoice.getArchived()) {
+        if (Stream.of(InvoiceStatus.SENT, InvoiceStatus.PROCESSED, InvoiceStatus.ACCEPTED).anyMatch(s -> s == invoice.getStatus())) {
             throw EMP_0013;
         }
         Optional.of(addInvoiceDto).map(AddInvoiceDto::getAmount).ifPresent(invoice::setAmount);

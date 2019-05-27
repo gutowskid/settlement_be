@@ -12,8 +12,9 @@ import pl.edu.pw.mini.payroll.api.invoice.InvoiceDetailsDto;
 import pl.edu.pw.mini.payroll.rest.invoice.domain.Invoice;
 import pl.edu.pw.mini.payroll.rest.invoice.domain.InvoiceRepository;
 
-import static pl.edu.pw.mini.payroll.rest.common.ErrorCode.PAY_0003;
-import static pl.edu.pw.mini.payroll.rest.common.ErrorCode.PAY_0004;
+import java.util.stream.Stream;
+
+import static pl.edu.pw.mini.payroll.rest.common.ErrorCode.*;
 
 @Service
 public class InvoiceService {
@@ -25,7 +26,7 @@ public class InvoiceService {
     private InvoiceDtoAssembler dtoAssembler;
 
     public JsonListChunk<InvoiceDto> actualInvoices(JsonListRequest request) {
-        Page<Invoice> page = repository.findByArchived(false, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+        Page<Invoice> page = repository.findByStatus(InvoiceStatus.ACCEPTED, PageRequest.of(request.getPageNumber(), request.getPageSize()));
         return new JsonListChunk<>(
                 dtoAssembler.toDtoList(page.get()),
                 page.getTotalElements(),
@@ -34,7 +35,7 @@ public class InvoiceService {
     }
 
     public JsonListChunk<InvoiceDto> archivedInvoices(JsonListRequest request) {
-        Page<Invoice> page = repository.findByArchived(true, PageRequest.of(request.getPageNumber(), request.getPageSize()));
+        Page<Invoice> page = repository.findByStatus(InvoiceStatus.PROCESSED, PageRequest.of(request.getPageNumber(), request.getPageSize()));
         return new JsonListChunk<>(
                 dtoAssembler.toDtoList(page.get()),
                 page.getTotalElements(),
@@ -44,6 +45,9 @@ public class InvoiceService {
 
     public void markInvoiceProcessed(Long invoiceId) {
         Invoice invoice = repository.findById(invoiceId).orElseThrow(() -> PAY_0003);
+        if(invoice.getStatus() != InvoiceStatus.SENT) {
+            throw PAY_0005;
+        }
         invoice.setStatus(InvoiceStatus.PROCESSED);
         invoice.setArchived(true);
         repository.save(invoice);
@@ -51,6 +55,9 @@ public class InvoiceService {
 
     public InvoiceDetailsDto getInvoice(Long invoiceId) {
         Invoice invoice = repository.findById(invoiceId).orElseThrow(() -> PAY_0004);
+        if(Stream.of(InvoiceStatus.SENT, InvoiceStatus.PROCESSED).noneMatch(i -> i == invoice.getStatus())) {
+            throw PAY_0006;
+        }
         return dtoAssembler.toDetailsDto(invoice);
     }
 
