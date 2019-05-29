@@ -17,5 +17,6 @@ public abstract class BaseBillDtoAssembler<X extends BaseBill, Z extends BillDto
         dto.setIncomeCosts(dto.getBrutto() * 0.2);
         dto.setTax((dto.getBrutto() - dto.getIncomeCosts()) * 0.18);
         dto.setNetto(dto.getBrutto() - dto.getTax());
+        dto.setStatus(input.getStatus());
     }
 }

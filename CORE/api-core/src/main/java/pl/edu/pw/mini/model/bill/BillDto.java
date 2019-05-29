@@ -21,4 +21,5 @@ public class BillDto {
     private String settlementNumber;
     private LocalDate from;
     private LocalDate to;
+    private BillStatus status;
 }
