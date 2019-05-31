@@ -30,13 +30,21 @@ public class TokenHandler {
         signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
     }
 
+    public String getTestToken(String userId, UserRole role) {
+        return getTokenWithUser(userId, role, "TEST", role.name(), "*");
+    }
+
     public String getTokenWithUser(String userId, UserRole role, String forename, String surname, HttpServletRequest request) {
+        return getTokenWithUser(userId, role, forename, surname, request.getRemoteAddr());
+    }
+
+    private String getTokenWithUser(String userId, UserRole role, String forename, String surname, String ip) {
         Date expires = new Date(System.currentTimeMillis() + properties.getTokenValidity());
 
         return Jwts.builder()
                 .claim(USER_ID, userId)
                 .claim(ROLE, role.name())
-                .claim(IP, request.getRemoteAddr())
+                .claim(IP, ip)
                 .claim(FORENAME, forename)
                 .claim(SURNAME, surname)
                 .setExpiration(expires)
