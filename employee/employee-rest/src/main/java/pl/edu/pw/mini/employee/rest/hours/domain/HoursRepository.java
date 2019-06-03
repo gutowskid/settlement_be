@@ -6,5 +6,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface HoursRepository extends JpaRepository<Hours, HoursPK> {
-    List<Hours> findByEmployeeIdAndDayIsAfterAndDayIsBefore(String employeeId, LocalDate after, LocalDate before);
+    List<Hours> findByEmployeeIdAndDayIsGreaterThanEqualAndDayIsLessThanEqual(String employeeId, LocalDate after, LocalDate before);
 }

@@ -29,7 +29,7 @@ public class HoursService {
     }
 
     public List<HoursDto> getMyDayHours(String employeeId, Period period) {
-        List<Hours> list = repository.findByEmployeeIdAndDayIsAfterAndDayIsBefore(employeeId, period.getFrom(), period.getTo());
+        List<Hours> list = repository.findByEmployeeIdAndDayIsGreaterThanEqualAndDayIsLessThanEqual(employeeId, period.getFrom(), period.getTo());
         return assembler.toDtoList(list);
     }
 }
