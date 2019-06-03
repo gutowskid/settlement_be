@@ -1,6 +1,10 @@
 package pl.edu.pw.mini.core.tests;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
+import io.restassured.config.ObjectMapperConfig;
+import io.restassured.config.RestAssuredConfig;
+import io.restassured.mapper.factory.Jackson2ObjectMapperFactory;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +17,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import pl.edu.pw.mini.core.invoker.rest.Rest;
 import pl.edu.pw.mini.core.security.authentication.TokenHandler;
 
+import java.lang.reflect.Type;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,8 +37,14 @@ public class AbstractTest {
     @Autowired
     protected TokenHandler tokenHandler;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Before
     public void setUpRestAssured() {
+        RestAssured.config = RestAssuredConfig.config().objectMapperConfig(new ObjectMapperConfig().jackson2ObjectMapperFactory(
+                (type, s) -> objectMapper
+        ));
         RestAssured.port = this.port;
         RestAssured.basePath = this.path;
     }
