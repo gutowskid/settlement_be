@@ -102,6 +102,11 @@ public class BillService {
 
     public void sendBill(String employeeId, Long id) {
         Bill bill = findBillById(employeeId, id);
+
+        if (Stream.of(BillStatus.SENT, BillStatus.PROCESSED, BillStatus.ACCEPTED).anyMatch(s -> s == bill.getStatus())) {
+            throw EMP_0014;
+        }
+        
         bill.setStatus(BillStatus.SENT);
         repository.save(bill);
     }

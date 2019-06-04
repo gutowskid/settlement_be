@@ -16,4 +16,5 @@ public class ErrorCode {
     public static BusinessException EMP_0011 = new BusinessException("EMP_0011", "Invoice not exists");
     public static BusinessException EMP_0012 = new BusinessException("EMP_0012", "Permission denied");
     public static BusinessException EMP_0013 = new BusinessException("EMP_0013", "Invalid invoice status");
+    public static BusinessException EMP_0014 = new BusinessException("EMP_0014", "Invalid bill status");
 }
