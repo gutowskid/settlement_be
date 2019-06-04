@@ -1,9 +1,11 @@
 package pl.edu.pw.mini.employee.rest.salary;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.pw.mini.core.configuration.Constants;
 import pl.edu.pw.mini.core.security.authentication.Context;
 import pl.edu.pw.mini.core.security.authorization.AllowAll;
 import pl.edu.pw.mini.core.tools.ContextService;
@@ -15,7 +17,7 @@ public class EmployeeSalaryController {
     @Autowired
     private EmployeeSalaryService salaryService;
 
-    @AllowAll
+    @Secured(Constants.EMPLOYEE_ROLE)
     @RequestMapping(path = "/salary", method = RequestMethod.GET, produces = "application/json")
     public Long getMySalary() {
         Context context = ContextService.getContext();

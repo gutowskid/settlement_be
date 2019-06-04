@@ -18,6 +18,7 @@ public class AuthorizationConfiguration extends GlobalMethodSecurityConfiguratio
         FluentListBuilder.<AccessDecisionVoter<? extends Object>>aList()
                 .with(new AllowAllDecisionVoter())
                 .with(new AllowAuthenticatedDecisionVoter())
+                .with(new AllowByRoleDecisionVoter())
                 .build());
     }
 }

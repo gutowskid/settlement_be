@@ -1,11 +1,13 @@
 package pl.edu.pw.mini.auth.rest.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import pl.edu.pw.mini.auth.rest.user.service.UsersService;
+import pl.edu.pw.mini.core.configuration.Constants;
 import pl.edu.pw.mini.core.security.authorization.AllowAll;
 import pl.edu.pw.mini.core.tools.StringWrapper;
 import pl.edu.pw.mini.auth.api.AddUserDto;
@@ -26,13 +28,13 @@ public class UsersController {
         return usersService.login(loginDto, request);
     }
 
-    @AllowAll
+    @Secured(Constants.PAYROLL_ROLE)
     @RequestMapping(value = "/auth/adduser", method = RequestMethod.POST, produces = "application/json")
     public StringWrapper addUser(@RequestBody AddUserDto addUserDto) {
         return usersService.addUser(addUserDto);
     }
 
-    @AllowAll
+    @Secured(Constants.PAYROLL_ROLE)
     @RequestMapping(value = "/auth/disableuser", method = RequestMethod.PUT, produces = "application/json")
     public void disableUser(String userId) {
         usersService.disableUser(userId);
