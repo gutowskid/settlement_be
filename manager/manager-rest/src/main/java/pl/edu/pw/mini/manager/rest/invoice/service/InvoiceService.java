@@ -63,7 +63,7 @@ public class InvoiceService {
 
     private InvoiceManager findManagerInvoice(String managerId, Long invoiceId) {
         InvoiceManager invoice = repository.findById(invoiceId).orElseThrow(() -> MAN_0004);
-        if(invoice.getManagers().stream().map(EmployeeManager::getManagerId).anyMatch(m -> m.equals(managerId))) {
+        if(invoice.getManagers().stream().map(EmployeeManager::getManagerId).noneMatch(m -> m.equals(managerId))) {
             throw MAN_0006;
         }
         return invoice;
