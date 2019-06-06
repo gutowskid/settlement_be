@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import pl.edu.pw.mini.model.invoice.InvoiceStatus;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Data
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseInvoice {
+public class BaseInvoice implements Serializable {
 
     @Id
     @Column(name = "ID", unique = true, nullable = false)
