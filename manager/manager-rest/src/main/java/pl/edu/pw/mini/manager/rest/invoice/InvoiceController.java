@@ -52,7 +52,6 @@ public class InvoiceController {
     @Secured(Constants.MANAGER_ROLE)
     @RequestMapping(path = "/invoice/{id}/attachment", method = RequestMethod.GET, produces = "application/json")
     public FileDto getInvoiceAttachment(@PathVariable Long id) throws IOException {
-        //return service.getInvoiceAttachment(ContextService.getContext().getUserId(), id);
-        return null; //TODO MOCK!
+        return service.getInvoiceAttachment(ContextService.getContext().getUserId(), id);
     }
 }

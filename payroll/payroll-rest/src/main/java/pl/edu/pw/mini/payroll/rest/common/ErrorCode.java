@@ -11,4 +11,5 @@ public class ErrorCode {
     public static BusinessException PAY_0006 = new BusinessException("PAY_0006", "Invalid invoice status");
     public static BusinessException PAY_0007 = new BusinessException("PAY_0007", "Invalid bill status");
     public static BusinessException PAY_0008 = new BusinessException("PAY_0008", "Invalid bill status");
+    public static BusinessException PAY_0009 = new BusinessException("PAY_0009", "Invoice not found!");
 }

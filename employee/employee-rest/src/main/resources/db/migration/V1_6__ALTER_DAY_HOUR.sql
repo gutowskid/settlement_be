@@ -1,1 +1,0 @@
-RENAME TABLE settlement.day_hour TO hours;

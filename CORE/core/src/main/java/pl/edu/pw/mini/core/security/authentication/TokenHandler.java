@@ -57,7 +57,7 @@ public class TokenHandler {
     public Token parseToken(String rawToken, HttpServletRequest request) {
         Claims claims = Jwts.parser().setSigningKey(signingKey).parseClaimsJws(rawToken).getBody();
         if(!claims.get(IP).equals("*") && !claims.get(IP).equals(request.getRemoteAddr())) {
-            throw new JwtException("Different user IP!");
+            //throw new JwtException("Different user IP!"); //TODO not working on aws
         }
 
         return Token.builder()

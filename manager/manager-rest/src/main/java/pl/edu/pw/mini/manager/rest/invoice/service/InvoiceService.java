@@ -4,13 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import pl.edu.pw.mini.core.aws.AwsS3Service;
 import pl.edu.pw.mini.manager.rest.employeemanager.domain.EmployeeManager;
 import pl.edu.pw.mini.manager.rest.invoice.domain.InvoiceManager;
 import pl.edu.pw.mini.manager.rest.invoice.domain.InvoiceManagerRepository;
 import pl.edu.pw.mini.model.JsonListChunk;
 import pl.edu.pw.mini.model.JsonListRequest;
+import pl.edu.pw.mini.model.aws.FileDto;
 import pl.edu.pw.mini.model.invoice.InvoiceDto;
 import pl.edu.pw.mini.model.invoice.InvoiceStatus;
+
+import java.io.IOException;
 
 import static pl.edu.pw.mini.manager.rest.common.ErrorCode.*;
 
@@ -22,6 +26,9 @@ public class InvoiceService {
 
     @Autowired
     private InvoiceDtoAssembler dtoAssembler;
+
+    @Autowired
+    private AwsS3Service s3Service;
 
     public JsonListChunk<InvoiceDto> actualInvoices(String managerId, JsonListRequest request) {
         Page<InvoiceManager> page = repository.findByManagers_managerIdContainsAndStatus(managerId, InvoiceStatus.SENT, PageRequest.of(request.getPageNumber(), request.getPageSize()));
@@ -72,5 +79,13 @@ public class InvoiceService {
         if(invoice.getStatus() != InvoiceStatus.SENT) {
             throw MAN_0005;
         }
+    }
+    public FileDto getInvoiceAttachment(String managerId, Long invoiceId) throws IOException {
+        InvoiceManager invoice = findManagerInvoice(managerId, invoiceId);
+        return FileDto
+                .builder()
+                .content(s3Service.getFile(invoiceId))
+                .name(invoice.getFileName())
+                .build();
     }
 }
